@@ -1,6 +1,5 @@
-import { resource } from '@angular/core';
 import { Component, inject } from '@angular/core';
-
+import { rxResource } from '@angular/core/rxjs-interop';
 import { ProductCardComponent } from '@products/components/product-card/product-card.component';
 import { ProductsService } from '@products/services/product.service';
 
@@ -13,12 +12,12 @@ import { ProductsService } from '@products/services/product.service';
   templateUrl: './home-page.component.html',
 })
 export class HomePageComponent {
-  private productsService = inject(ProductsService);
+  productsService = inject(ProductsService);
 
   productsResource = rxResource({
     request: () => ({}),
     loader: ({ request }) => {
-      return this.productsService.getProducts({});
+      return this.productsService.getProducts();
     },
   });
 }
