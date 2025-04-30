@@ -1,22 +1,19 @@
-<div class="card bg-base-100 shadow-sm animate-fadeIn">
-  <figure class="px-10 pt-10">
-    <img
-      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-      alt="Shoes"
-      class="rounded-xl"
-    />
+<div class="card card-compact bg-base-100 shadow-xl animate-fadeIn">
+  <figure>
+    <img [src]="product().images | productImage" [alt]="product().title" />
   </figure>
-  <div class="card-body items-center text-center">
-    <h2 class="card-title">Card Title</h2>
-    <p>
-      A card component has a figure, a body part, and inside body there are
-      title and actions parts
-    </p>
-    <div class="card-actions">
-      <!-- <button class="btn btn-primary">Buy Now</button> -->
-      <a class="link link-accent" [routerLink]="['/product', 't-shirt']"
-        >Ver productos</a
-      >
+  <div class="card-body">
+    <h2
+      class="card-title font-montserrat text-accent text-lg hover:underline cursor-pointer"
+      [routerLink]="['/product', product().slug]"
+    >
+      {{ product().title }}
+    </h2>
+    <p>{{ product().description | slice : 0 : 70 }}...</p>
+    <div class="card-actions justify-end">
+      <a class="link link-accent" [routerLink]="['/product', product().slug]">
+        Ver producto
+      </a>
     </div>
   </div>
 </div>
