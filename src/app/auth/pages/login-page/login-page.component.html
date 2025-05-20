@@ -1,0 +1,97 @@
+<form
+  [formGroup]="loginForm"
+  (ngSubmit)="onSubmit()"
+  class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl px-10 py-10 w-full max-w-xl flex flex-col gap-6"
+>
+  <h2 class="text-3xl font-extrabold text-center text-gray-800">Bienvenido</h2>
+  <p class="text-center text-gray-600">Ingresa a tu cuenta para continuar</p>
+
+  <!-- Email -->
+  <div
+    class="flex items-center border border-gray-300 rounded-lg px-4 py-2 bg-white"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 text-gray-400 mr-2"
+      fill="currentColor"
+      viewBox="0 0 16 16"
+    >
+      <path
+        d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793L7.674 8.51a.75.75 0 0 0 .652 0L15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z"
+      />
+      <path
+        d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z"
+      />
+    </svg>
+    <input
+      type="email"
+      formControlName="email"
+      placeholder="Correo electrónico"
+      class="w-full focus:outline-none text-gray-700 placeholder-gray-400 bg-transparent"
+    />
+  </div>
+
+  <!-- Password -->
+  <div
+    class="flex items-center border border-gray-300 rounded-lg px-4 py-2 bg-white"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 text-gray-400 mr-2"
+      fill="currentColor"
+      viewBox="0 0 16 16"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
+        clip-rule="evenodd"
+      />
+    </svg>
+    <input
+      type="password"
+      formControlName="password"
+      placeholder="Contraseña"
+      class="w-full focus:outline-none text-gray-700 placeholder-gray-400 bg-transparent"
+    />
+  </div>
+
+  <!-- Botón -->
+  <button
+    type="submit"
+    class="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-400"
+  >
+    Iniciar sesión
+  </button>
+
+  <p class="text-neutral-800 text-center mt-6">
+    ¿No tienes cuenta?
+    <a
+      routerLink="/auth/register"
+      class="text-indigo-600 font-semibold underline hover:text-indigo-700 transition-colors"
+    >
+      Crea una aquí
+    </a>
+  </p>
+</form>
+
+@if(hasError()){
+<div
+  role="alert"
+  class="alert alert-error animate-fadeIn fixed top-5 right-5 w-52"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-6 w-6 shrink-0 stroke-current"
+    fill="none"
+    viewBox="0 0 24 24"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+    />
+  </svg>
+  <span>Por favor revise la información ingresada.</span>
+</div>
+}
