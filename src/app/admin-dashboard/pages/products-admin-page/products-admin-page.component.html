@@ -1,0 +1,44 @@
+<div class="flex justify-between items-center py-2">
+  <!-- Columna izquierda -->
+  <div class="flex flex-col justify-center leading-snug space-y-1">
+    <h1 class="text-2xl font-bold m-0 p-0 leading-tight">
+      Listado de productos
+    </h1>
+    <h3 class="text-lg m-0 p-0 leading-tight">
+      Total de productos
+      <span class="text-accent">{{ productsResource.value()?.count }}</span>
+    </h3>
+  </div>
+
+  <!-- Columna derecha: paginación -->
+  <div class="self-center">
+    <app-pagination
+      class="!mt-0"
+      [pages]="productsResource.value()?.pages ?? 0"
+      [currentPage]="paginationService.currentPage()"
+    ></app-pagination>
+  </div>
+
+  <select
+    class="select select-bordered w-32"
+    (change)="productPerPage.set(+selectPerPage.value)"
+    #selectPerPage
+  >
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+  </select>
+</div>
+
+<div class="divider"></div>
+
+<div class="flex flex-1"></div>
+
+<button class="btn btn-primary" routerLink="/admin/products/new">
+  Nuevo Producto
+</button>
+
+<!-- Listado -->
+
+<product-table [products]="productsResource.value()?.products ?? []" />

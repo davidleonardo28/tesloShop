@@ -1,4 +1,4 @@
-<div class="navbar bg-base-100 shadow-sm">
+<div class="navbar bg-base-100">
   <div class="navbar-start">
     <div class="dropdown">
       <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -19,7 +19,7 @@
       </div>
       <ul
         tabindex="0"
-        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
       >
         <li>
           <a
@@ -50,9 +50,9 @@
         </li>
       </ul>
     </div>
-    <a routerLink="/" class="btn btn-ghost text-xl font-montserrat"
-      >Teslo
-      <span class="text-secondary"> | Shop</span>
+    <a routerLink="/" class="btn btn-ghost text-xl font-montserrat">
+      Teslo
+      <span class="text-secondary">| Shop</span>
     </a>
   </div>
   <div class="navbar-center hidden lg:flex">
@@ -87,6 +87,11 @@
     </ul>
   </div>
   <div class="navbar-end gap-4">
+    @if (authService.isAdmin()) {
+    <a routerLink="/admin" class="btn text-accent">Admin Panel</a>
+    }
+    <!--  -->
+
     @if ( authService.authStatus() === 'authenticated' ) {
     <button class="btn btn-ghost">
       {{ authService.user()?.fullName }}
@@ -96,7 +101,7 @@
     </button>
     }
     <!--  -->
-    @else if ( authService.authStatus() === 'Not-authenticated' ) {
+    @else if ( authService.authStatus() === 'not-authenticated' ) {
     <a routerLink="/auth/login" class="btn btn-secondary">Login</a>
     }
     <!--  -->

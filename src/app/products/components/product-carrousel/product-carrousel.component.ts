@@ -3,6 +3,8 @@ import {
   Component,
   ElementRef,
   input,
+  OnChanges,
+  SimpleChanges,
   viewChild,
 } from '@angular/core';
 
@@ -26,35 +28,44 @@ import { ProductImagePipe } from '@products/pipes/product-image.pipe';
     }
   `,
 })
-export class ProductCarrouselComponent {
+export class ProductCarrouselComponent implements OnChanges {
   images = input.required<string[]>();
   swiperDiv = viewChild.required<ElementRef>('swiperDiv');
 
-  ngAfterViewInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['images']) {
+      // Esperamos a que el DOM esté completamente renderizado con las nuevas imágenes
+      queueMicrotask(() => this.swiperInit());
+    }
+  }
+
+  swiperInit() {
     const element = this.swiperDiv().nativeElement;
     if (!element) return;
 
+    // Destruir swiper previo si existe
+    if (element.swiper) {
+      element.swiper.destroy(true, true);
+    }
+
     const swiper = new Swiper(element, {
-      // Optional parameters
       direction: 'horizontal',
       loop: true,
 
       modules: [Navigation, Pagination],
 
-      // If we need pagination
       pagination: {
-        el: '.swiper-pagination',
+        el: element.querySelector('.swiper-pagination'),
+        clickable: true,
       },
 
-      // Navigation arrows
       navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        nextEl: element.querySelector('.swiper-button-next'),
+        prevEl: element.querySelector('.swiper-button-prev'),
       },
 
-      // And if we need scrollbar
       scrollbar: {
-        el: '.swiper-scrollbar',
+        el: element.querySelector('.swiper-scrollbar'),
       },
     });
   }

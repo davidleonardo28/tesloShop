@@ -1,3 +1,4 @@
+import { adminDashboardRoutes } from './admin-dashboard/admin-dashboard.routes';
 import { Routes } from '@angular/router';
 import { NotAuthenticatedGuard } from '@auth/guards/not-authenticated.guard';
 
@@ -7,6 +8,10 @@ export const routes: Routes = [
     loadChildren: () => import('./auth/auth.routes'),
     //Guards
     canMatch: [NotAuthenticatedGuard],
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin-dashboard/admin-dashboard.routes'),
   },
   {
     path: '',
